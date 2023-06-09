@@ -20,6 +20,7 @@ class Especialidad(db.Entity):
     nombre = Required(str, 100)
     estado = Required(int)
     cursoespecialidad = Set('Cursoespecialidad')
+    matricula = Set('Matricula')
 
 
 class Curso(db.Entity):
