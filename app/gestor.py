@@ -15,4 +15,14 @@ class DBAdmin:
     def get_Alumnos(self):
         data = Alumno()
 
+    @db_session
+    def new_Alumno(self, data):
+        try:
+            Alumno(**data)
+            commit()
+            return True, 'Creation Successful!'
+        except Exception as e:
+            return False, '{0}'. format(e)
+
+
 db = DBAdmin()

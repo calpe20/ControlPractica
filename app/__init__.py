@@ -14,5 +14,8 @@ def admin():
     return 'Admin eres tu?'
 
 
+from app.rutas import *
+
+
 if __name__ == '__main__':
     app.run()
