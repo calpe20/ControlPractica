@@ -18,6 +18,14 @@ def api_alumno_post():
         status, message = db.new_Alumno(data)
         return jsonify({'status': status, 'message': message})
     return jsonify({'status': False, 'message': 'Metodo no permitido'})
+
+
+@app.route('/api/editalum', methods = ['PUT'])
+def api_alumno_put():
+    if request.method == 'PUT':
+        status, data = db.edit_Alumno()
+        return jsonify({'status': status, 'data': data})
+        
 <<<<<<< Updated upstream
 
 
