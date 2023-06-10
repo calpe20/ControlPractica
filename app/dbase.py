@@ -8,7 +8,7 @@ class Alumno(db.Entity):
     nombre = Required(str, 50)
     apellidos = Required(str, 100)
     edad = Required(int)
-    dni = Required(str, 8, unique=True)
+    dni = Required(str, 8, unique = True)
     direccion = Optional(str, 200)
     observacion = Optional(LongStr)
     estado = Required(int)
