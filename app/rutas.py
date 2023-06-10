@@ -7,8 +7,8 @@ from flask import request, jsonify
 def api_alumno_get():
     if request.method == 'GET':
         status, data = db.get_Alumnos()
-        return jsonify({'status': status, 'data': data})
-    return jsonify({'message': 'Lista de alumnos'})
+        return jsonify({'status': status, 'message': 'RELACION DE ALUMNOS', 'data': data})
+    #return jsonify({'message': 'Lista de alumnos'})
 
 
 @app.route('/api/alumno', methods=['POST'])
@@ -19,5 +19,9 @@ def api_alumno_post():
         return jsonify({'status': status, 'message': message})
     return jsonify({'status': False, 'message': 'Metodo no permitido'})
 
-@app.route('/api/editalum', methods = 'PUT')
+
+@app.route('/api/editalum', methods = ['PUT'])
 def api_alumno_put():
+    if request.method == 'PUT':
+        status, data = db.edit_Alumno()
+        return jsonify({'status': status, 'data': data})
