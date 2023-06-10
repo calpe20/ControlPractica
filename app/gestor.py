@@ -43,8 +43,18 @@ class DBAdmin:
         
     
     @db_session
-    def edit_Alumno(self):
-        data = Alumno()
+    def edit_Alumno(self, alumno_id, data):
+        try:
+            alumno = Alumno.get(id=alumno_id)
+            if alumno:
+                alumno.set(**data)
+                commit()
+                return True, 'Edit successful!'
+            else:
+                return False, 'Alumno not found.'
+        except Exception as e:
+            return False, str(e)
+
         
 
 
