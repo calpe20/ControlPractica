@@ -6,8 +6,8 @@ from flask import request, jsonify
 @app.route('/api/listalum>', methods = ['GET'])
 def api_alumno_get():
     if request.method == 'GET':
-        data = db.get_Alumnos()
-        return jsonify(data)
+        status, data = db.get_Alumnos()
+        return jsonify({'status': status, 'data': data})
     return jsonify({'message': 'Lista de alumnos'})
 
 

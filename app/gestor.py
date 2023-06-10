@@ -13,7 +13,24 @@ class DBAdmin:
     
     @db_session
     def get_Alumnos(self):
-        data = Alumno()
+        data = Alumno.select()
+        response = []
+        if data:
+            for a in data:
+                row = {
+                    'id': a['id'],
+                    'nombre': a['nombre'],
+                    'apellidos': a['apellidos'],
+                    'edad': a['edad'],
+                    'dni': a['dni'],
+                    'direccion': a['direccion'],
+                    'observacion': a['observacion'],
+                    'estado': a['estado']
+                }
+                response.append(row)
+            return True, response
+        return False, response
+            
 
     @db_session
     def new_Alumno(self, data):
