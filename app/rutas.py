@@ -23,23 +23,8 @@ def api_alumno_post():
 @app.route('/api/editalum', methods = ['PUT'])
 def api_alumno_put():
     if request.method == 'PUT':
-        status, data = db.edit_Alumno()
+        data = request.json
+        id = data['id']
+        status, data = db.edit_Alumno(id, data)
         return jsonify({'status': status, 'data': data})
-        
-<<<<<<< Updated upstream
 
-
-@app.route('/api/editalum', methods = ['PUT'])
-def api_alumno_put():
-    if request.method == 'PUT':
-        status, data = db.edit_Alumno()
-        return jsonify({'status': status, 'data': data})
-=======
-    '''
-    elif request.method == 'GET':
-        #data = db.get_Alumnos()
-        message = db.get_Alumnos()
-        return jsonify({'message': message})
-    return jsonify({'message': 'Lista de alumnos'})
-    '''
->>>>>>> Stashed changes

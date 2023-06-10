@@ -47,15 +47,14 @@ class DBAdmin:
         try:
             alumno = Alumno.get(id=alumno_id)
             if alumno:
-                alumno.set(**data)
+                alumno.nombre = data['nombre']
+                
                 commit()
                 return True, 'Edit successful!'
             else:
                 return False, 'Alumno not found.'
         except Exception as e:
             return False, str(e)
-
-        
 
 
 db = DBAdmin()
