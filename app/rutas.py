@@ -3,7 +3,7 @@ from app.gestor import *
 from flask import request, jsonify
 
 
-@app.route('/api/listalum>', methods = ['GET'])
+@app.route('/api/listalum', methods = ['GET'])
 def api_alumno_get():
     if request.method == 'GET':
         status, data = db.get_Alumnos()
@@ -18,10 +18,6 @@ def api_alumno_post():
         status, message = db.new_Alumno(data)
         return jsonify({'status': status, 'message': message})
     return jsonify({'status': False, 'message': 'Metodo no permitido'})
-    '''elif request.method == 'GET':
-        #data = db.get_Alumnos()
-        message = db.get_Alumnos()
-        return jsonify({'message': message})
-    return jsonify({'message': 'Lista de alumnos'})'''
-    
 
+@app.route('/api/editalum', methods = 'PUT')
+def api_alumno_put():

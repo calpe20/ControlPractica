@@ -18,14 +18,14 @@ class DBAdmin:
         if data:
             for a in data:
                 row = {
-                    'id': a['id'],
-                    'nombre': a['nombre'],
-                    'apellidos': a['apellidos'],
-                    'edad': a['edad'],
-                    'dni': a['dni'],
-                    'direccion': a['direccion'],
-                    'observacion': a['observacion'],
-                    'estado': a['estado']
+                    'id': a.id,
+                    'nombre': a.nombre,
+                    'apellidos': a.apellidos,
+                    'edad': a.edad,
+                    'dni': a.dni,
+                    'direccion': a.direccion,
+                    'observacion': a.observacion,
+                    'estado': a.estado
                 }
                 response.append(row)
             return True, response
@@ -40,6 +40,12 @@ class DBAdmin:
             return True, 'Creation Successful!'
         except Exception as e:
             return False, '{0}'. format(e)
+        
+    
+    @db_session
+    def edit_Alumno(self):
+        data = Alumno()
+        
 
 
 db = DBAdmin()
