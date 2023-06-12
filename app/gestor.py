@@ -54,7 +54,7 @@ class DBAdmin:
     @db_session
     def edit_Alumno(self, alumno_id, data):
         try:
-            alumno = Alumno.get(id=alumno_id)
+            alumno = Alumno[alumno_id]
             if alumno:
 <<<<<<< Updated upstream
                 alumno.edad = data['edad'] 
