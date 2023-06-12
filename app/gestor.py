@@ -47,12 +47,28 @@ class DBAdmin:
         try:
             alumno = Alumno.get(id=alumno_id)
             if alumno:
-                alumno.nombre = data['nombre']
-                
+                alumno.edad = data['edad'] 
+                alumno.direccion = data['direccion']
+                alumno.observacion = data['observacion'] 
+                alumno.estado = data['estado']            
                 commit()
                 return True, 'Edit successful!'
             else:
-                return False, 'Alumno not found.'
+                return False, 'Alumno not found'
+        except Exception as e:
+            return False, str(e)
+        
+    
+    @db_session
+    def delete_Alumno(self, alumno_id):
+        try:
+            alumno = Alumno.get(id=alumno_id)
+            if alumno:
+                alumno.delete()
+                commit()
+                return True, 'Delete successful!'
+            else:
+                return False, 'Alumno not found'
         except Exception as e:
             return False, str(e)
 
