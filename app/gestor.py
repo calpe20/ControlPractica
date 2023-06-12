@@ -13,7 +13,16 @@ class DBAdmin:
     
     @db_session
     def get_Alumnos(self):
-        data = Alumno.select()
+        # select * from alumno where nombre = 'julio'
+        
+        #data = Alumno.select(lambda a: )
+        alumno = Alumno.get(id=3)
+        # Update alumno set nombre = 'Gin' where id =3;
+        alumno.nombre = 'Gin'
+
+        # rollback()
+        # commit()
+        print(len(data))
         response = []
         if data:
             for a in data:
@@ -47,10 +56,15 @@ class DBAdmin:
         try:
             alumno = Alumno.get(id=alumno_id)
             if alumno:
+<<<<<<< Updated upstream
                 alumno.edad = data['edad'] 
                 alumno.direccion = data['direccion']
                 alumno.observacion = data['observacion'] 
                 alumno.estado = data['estado']            
+=======
+                alumno.nombre = data['nombre']
+
+>>>>>>> Stashed changes
                 commit()
                 return True, 'Edit successful!'
             else:
