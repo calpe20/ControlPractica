@@ -9,7 +9,7 @@ from flask import request, jsonify
 def api_alumno_get():
     if request.method == 'GET':
         status, data = db.get_Alumnos()
-        return jsonify({'status': status,'message': 'RELACION DE ALUMNOS', 'data': data})
+        return jsonify({'status': status,'data': data, 'message': 'RELACION DE ALUMNOS'})
     #return jsonify({'message': 'Lista de alumnos'})
 
 
@@ -39,7 +39,7 @@ def api_alumno_delete(id):
     return jsonify({'status': False, 'message': 'Method not allowed!'})
 
     
-# Rutas CursoEspecialidad   
+# Rutas Especialidad   
 
 @app.route('/api/esp', methods = ['GET'])
 def api_esp_get():
@@ -80,7 +80,7 @@ def api_esp_delete(id):
 @app.route('/api/curso', methods = ['GET'])
 def api_curso_get():
     if request.method == 'GET':
-        status, data = db.get_Cursos()
+        status, data = db.get_Curso()
         return jsonify({'status': status, 'data': data, 'message': 'LISTA DE CURSOS'})
     
 
@@ -93,7 +93,7 @@ def api_curso_post():
     return jsonify({'status': False, 'message': 'Method not allowed!'})
 
 
-@app.route('/api/curso', methods = ['PUT'])
+@app.route('/api/curso<int:id>', methods = ['PUT'])
 def api_curso_put(id):
     if request.method == 'PUT':
         data = request.json
@@ -102,11 +102,20 @@ def api_curso_put(id):
     return jsonify({'status': False, 'message': 'Method not allowed!'})
 
 
-@app.route('/api/curso', methods= ['DELETE'])
+@app.route('/api/curso<int:id>', methods= ['DELETE'])
 def api_curso_delete(id):
     if request.method == 'DELETE':
-        status, message = db.delete_Alumno(id)
+        status, message = db.delete_Curso(id)
         return jsonify({'status': status, 'message': message})
     return jsonify({'status': status, 'message': 'Method not allowed!'})
+
+
+# Rutas Cursoespecialidad
+
+@app.route('/api/cursoesp', methods = ['GET'])
+def api_cursoesp_get():
+    if request.method == 'GET':
+        status, data = db.get_Cursoesp()
+        return jsonify({'status': status,'data':  data, 'message': 'CURSO POR ESPECIALIDAD'})
         
 

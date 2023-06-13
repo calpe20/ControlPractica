@@ -200,6 +200,31 @@ class DBAdmin:
                 return False, 'Curso not found'
         except Exception as e:
             return False, str(e)
+        
+# Tabla CursoEspecialidad
+
+    @db_session
+    def get_Cursoesp(self):
+        
+        data = Cursoespecialidad.select()
+        
+        curso_esp = Cursoespecialidad.get(id=1)
+        
+        curso_esp.idespecialidad = 3,
+        curso_esp.idcurso = 5
+        
+        print(len(data))
+        response = []
+        if data:
+            for a in data:
+                row = {
+                    'id' : a.id,
+                    'idespecialidad': a.idespecialidad,
+                    'idcurso': a.idcurso
+                }
+                response.append(row)
+                return True, response
+            return False, response
             
     
 db = DBAdmin()
