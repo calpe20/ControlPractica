@@ -84,4 +84,66 @@ class DBAdmin:
             return False, str(e)
 
 
+# Tabla maestra Especialidad
+
+    @db_session
+    def get_Esp(self):
+        
+        data = Especialidad.select()
+            
+        print(len(data))
+        response = []
+        if data:
+            for a in data:
+                row = {
+                    'id': a.id,
+                    'nombre': a.nombre,
+                    'estado': a.estado
+                }
+                response.append(row)
+            return True, response
+        return False, response
+
+
+    @db_session
+    def new_Esp(self, data):
+        try:
+            Especialidad(**data)
+            commit()
+            return True, 'Creation Successful!'
+        except Exception as e:
+            return False, '{0}'. format(e)
+        
+        
+# Tabla maestra Curso
+
+    @db_session
+    def get_Cursos(self):
+        
+        data = Curso.select()
+        
+        print(len(data))
+        response = []
+        if data:
+            for a in data:
+                row = {
+                    'id': a.id,
+                    'nombre': a.nombre,
+                    'credito': a.credito,
+                    'estado': a.estado
+                }
+                response.append(row)
+            return True, response
+        return False, response
+    
+    @db_session
+    def new_Curso(self, data):
+        try:
+            Curso(**data)
+            commit()
+            return True, 'Creation Successful!'
+        except Exception as e:
+            return False, '{0}'. format(e)
+
+    
 db = DBAdmin()
