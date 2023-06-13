@@ -114,11 +114,40 @@ class DBAdmin:
         except Exception as e:
             return False, '{0}'. format(e)
         
-        
+    
+    @db_session
+    def edit_Esp(self, esp_id, data):
+        try:
+            especialidad = Especialidad[esp_id]
+            if especialidad:
+                especialidad.nombre = data['nombre']
+                especialidad.estado = data['estado']
+                commit()
+                return True, 'Edit sucessful!'
+            else:
+                return False, 'Specialty not found'
+        except Exception as e:
+            return False, str(e)
+
+
+    @db_session
+    def delete_Esp(self, esp_id):
+        try:
+            especialidad = Especialidad.get(id=esp_id)
+            if especialidad:
+                especialidad.delete()
+                commit()
+                return True, 'Delete sucessful!'
+            else:
+                return False, 'Specialty not found'
+        except Exception as e:
+            return False, str(e)
+    
+                
 # Tabla maestra Curso
 
     @db_session
-    def get_Cursos(self):
+    def get_Curso(self):
         
         data = Curso.select()
         
@@ -144,6 +173,33 @@ class DBAdmin:
             return True, 'Creation Successful!'
         except Exception as e:
             return False, '{0}'. format(e)
-
+        
+    @db_session
+    def edit_Curso(self, curso_id, data):
+        try:
+            curso = Curso[curso_id]
+            if curso:
+                curso.nombre = data['nombre']
+                curso.credito = data['credito']
+                curso.estadoq = data['estado']
+                return True, 'Edit succesful!'
+            else:
+                return False, 'Curso not found'
+        except Exception as e:
+            return False, str(e) 
+        
+    @db_session
+    def delete_Curso(self, curso_id):
+        try:
+            curso = Curso.get(id=curso_id)
+            if curso:
+                curso.delete()
+                commit()
+                return True, 'Delete sucessful!'
+            else:
+                return False, 'Curso not found'
+        except Exception as e:
+            return False, str(e)
+            
     
 db = DBAdmin()

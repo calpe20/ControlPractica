@@ -57,6 +57,24 @@ def api_esp_post():
     return jsonify({'status': False, 'message': 'Method not allowed!'})
 
 
+@app.route('/api/esp<int:id>', methods = ['PUT'])
+def api_esp_put(id):
+    if request.method == 'PUT':
+        data = request.json
+        status, message = db.edit_Esp(id, data)
+        return jsonify({'status': status, 'message': message})
+    return jsonify({'status': False, 'message': 'Method not allowed'})
+
+
+
+@app.route('/api/esp<int:id>', methods = ['DELETE'])
+def api_esp_delete(id):
+    if request.method == 'DELETE':
+        status, message = db.delete_Esp(id)
+        return jsonify({'status': status, 'message': message})
+    return jsonify({'status': False, 'message': 'Method not allowed!'})
+                       
+
 # Rutas Curso
 
 @app.route('/api/curso', methods = ['GET'])
@@ -73,4 +91,22 @@ def api_curso_post():
         status, message = db.new_Curso(data)
         return jsonify({'status': status, 'message': message})
     return jsonify({'status': False, 'message': 'Method not allowed!'})
+
+
+@app.route('/api/curso', methods = ['PUT'])
+def api_curso_put(id):
+    if request.method == 'PUT':
+        data = request.json
+        status, message = db.edit_Curso(id, data)
+        return jsonify({'status': status, 'message': message})
+    return jsonify({'status': False, 'message': 'Method not allowed!'})
+
+
+@app.route('/api/curso', methods= ['DELETE'])
+def api_curso_delete(id):
+    if request.method == 'DELETE':
+        status, message = db.delete_Alumno(id)
+        return jsonify({'status': status, 'message': message})
+    return jsonify({'status': status, 'message': 'Method not allowed!'})
+        
 
