@@ -206,15 +206,14 @@ class DBAdmin:
     @db_session
     def get_Cursoesp(self):
         
-        data = Cursoespecialidad.select()
+        data = Cursoespecialidad.select((lambda a: a.especialidad.nombre, a.curso.nombre) for a in Cursoespecialidad
+                                        for a.especialidad in Especialidad if a.curso.id == a.curso.id)
+        for nombre_especialidad, nombre_curso in data:
+            print(f"Especialidad: {nombre_especialidad}, Curso: {nombre_curso}")
+     
         
-        curso_esp = Cursoespecialidad.get(id=1)
-        
-        curso_esp.idespecialidad = 3,
-        curso_esp.idcurso = 5
-        
-        print(len(data))
-        response = []
+"""print(len(data))
+    response = []
         if data:
             for a in data:
                 row = {
@@ -222,9 +221,10 @@ class DBAdmin:
                     'idespecialidad': a.idespecialidad,
                     'idcurso': a.idcurso
                 }
-                response.append(row)
+               response.append(row)
                 return True, response
-            return False, response
+            return False, response"""
             
     
 db = DBAdmin()
+
