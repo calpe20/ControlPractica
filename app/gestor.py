@@ -120,8 +120,7 @@ class DBAdmin:
         try:
             especialidad = Especialidad[esp_id]
             if especialidad:
-                especialidad.nombre = data['nombre']
-                especialidad.estado = data['estado']
+                especialidad.Set(**data)
                 commit()
                 return True, 'Edit sucessful!'
             else:

@@ -57,11 +57,15 @@ def api_esp_post():
     return jsonify({'status': False, 'message': 'Method not allowed!'})
 
 
-@app.route('/api/esp<int:id>', methods = ['PUT'])
+@app.route('/api/esp', methods = ['PUT'])
 def api_esp_put(id):
     if request.method == 'PUT':
         data = request.json
-        status, message = db.edit_Esp(id, data)
+        row = {
+            'nombre': data['nombre'],
+            'estado': data['estado']
+        }
+        status, message = db.edit_Esp(id, row)
         return jsonify({'status': status, 'message': message})
     return jsonify({'status': False, 'message': 'Method not allowed'})
 
