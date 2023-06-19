@@ -1,4 +1,4 @@
-from app.dbase import *
+from app.dbase import * 
 # from app.libs.jsonapi import JSONAPI
 from pony.orm.serialization import to_dict
 from datetime import datetime, date
@@ -18,9 +18,9 @@ class DBAdmin:
         # select * from alumno where nombre = 'julio'
         
         #data = Alumno.select(lambda a: )
-        alumno = Alumno.get(id=39)
+        #alumno = Alumno.get(id=39)
         # Update alumno set nombre = 'Gin' where id =3;
-        alumno.nombre = 'FEmilio'
+        #alumno.nombre = 'FEmilio'
 
         # rollback()
         # commit()
@@ -36,7 +36,8 @@ class DBAdmin:
                     'dni': a.dni,
                     'direccion': a.direccion,
                     'observacion': a.observacion,
-                    'estado': a.estado
+                    'estado': a.estado,
+                    'ruta': a.ruta
                 }
                 response.append(row)
             return True, response
@@ -58,10 +59,11 @@ class DBAdmin:
         try:
             alumno = Alumno[alumno_id]
             if alumno:
-                alumno.edad = data['edad'] 
+                """alumno.edad = data['edad'] 
                 alumno.direccion = data['direccion']
                 alumno.observacion = data['observacion'] 
-                alumno.estado = data['estado']            
+                alumno.estado = data['estado']"""  
+                alumno.set(**data)          
                 commit()
                 return True, 'Edit successful!'
             else:
@@ -120,7 +122,7 @@ class DBAdmin:
         try:
             especialidad = Especialidad[esp_id]
             if especialidad:
-                especialidad.Set(**data)
+                especialidad.set(**data)
                 commit()
                 return True, 'Edit sucessful!'
             else:
@@ -205,12 +207,17 @@ class DBAdmin:
     @db_session
     def get_Cursoesp(self):
         
-        data = Cursoespecialidad.select((lambda a: a.especialidad.nombre, a.curso.nombre) for a in Cursoespecialidad
-                                        for a.especialidad in Especialidad if a.curso.id == a.curso.id)
-        for nombre_especialidad, nombre_curso in data:
-            print(f"Especialidad: {nombre_especialidad}, Curso: {nombre_curso}")
-     
+        data = Cursoespecialidad.select(lambda c: c.idespecialidad.nombre and c.idcurso.nombre)
         
+        if len(data):
+            for c in data:
+                response = []
+                row = {
+                    'nombre': c.idespecialidad['nombre'],
+                    'nombre':  c.idcurso['nombre']
+                    }
+                return True, response
+             
 """print(len(data))
     response = []
         if data:
@@ -219,7 +226,7 @@ class DBAdmin:
                     'id' : a.id,
                     'idespecialidad': a.idespecialidad,
                     'idcurso': a.idcurso
-                }
+                }       
                response.append(row)
                 return True, response
             return False, response"""

@@ -22,7 +22,7 @@ def api_alumno_post():
     return jsonify({'status': False, 'message': 'Method not allowed!'})
 
 
-@app.route('/api/alumno<int:id>', methods = ['PUT'])
+@app.route('/api/alumno/<int:id>', methods = ['PUT'])
 def api_alumno_put(id):
     if request.method == 'PUT':
         data = request.json
@@ -57,7 +57,7 @@ def api_esp_post():
     return jsonify({'status': False, 'message': 'Method not allowed!'})
 
 
-@app.route('/api/esp', methods = ['PUT'])
+@app.route('/api/esp<id>', methods = ['PUT'])
 def api_esp_put(id):
     if request.method == 'PUT':
         data = request.json
@@ -116,10 +116,15 @@ def api_curso_delete(id):
 
 # Rutas Cursoespecialidad
 
-@app.route('/api/cursoesp', methods = ['GET'])
+"""@app.route('/api/cursoesp', methods = ['GET'])
 def api_cursoesp_get():
     if request.method == 'GET':
         status, data = db.get_Cursoesp()
-        return jsonify({'status': status,'data':  data, 'message': 'CURSO POR ESPECIALIDAD'})
+        return jsonify({'status': status,'data':  data, 'message': 'CURSO POR ESPECIALIDAD'})"""
+
+@app.route('/api/cursoesp', methods=['GET'])
+def api_get_cursoespecialidad():
+    data = db.get_Cursoesp()
+    return jsonify(data)
         
 

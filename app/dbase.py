@@ -12,6 +12,7 @@ class Alumno(db.Entity):
     direccion = Optional(str, 200)
     observacion = Optional(LongStr)
     estado = Required(int)
+    ruta = Optional(str, 50)
     matricula = Set('Matricula')
 
 
